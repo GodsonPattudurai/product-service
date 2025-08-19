@@ -15,10 +15,10 @@ public class ProductRequest {
     @NotNull
     @NotBlank
     private String productName;
-    private Integer id;
     private String description;
     @Min(0)
     private Double price;
+    private Integer qty;
 
 
 }

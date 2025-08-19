@@ -1,6 +1,9 @@
 package com.pooja.product_service.controller;
 
+import com.pooja.product_service.entity.Product;
 import com.pooja.product_service.model.ProductRequest;
+import com.pooja.product_service.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -9,15 +12,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/product")
 public class ProductController {
-    List<ProductRequest> productRequestList = new ArrayList<ProductRequest>();
+    @Autowired
+    ProductService productService;
     @PostMapping("/save")
-    public String saveProduct(@RequestBody ProductRequest productRequest) {
-        productRequestList.add(productRequest);
-        String msg = "Saved Succesfully";
-        return msg;
+    public Integer saveProduct(@RequestBody ProductRequest productRequest) {
+
+        return productService.saveProduct(productRequest);
     }
     @GetMapping
-    public List<ProductRequest> getProduct() {
-        return productRequestList;
+    public List<Product> getProduct() {
+        return productService.getProduct();
     }
 }
