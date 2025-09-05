@@ -7,27 +7,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
+
     @Autowired
     ProductRepository productRepository;
+
     public Integer saveProduct(ProductRequest productRequest) {
         Product product = Product.builder().qty(productRequest.getQty())
                 .price(productRequest.getPrice())
                 .name(productRequest.getProductName())
                 .description(productRequest.getDescription()).build();
-
         productRepository.save(product);
         return product.getId();
     }
 
-    public List<Product> getProduct() {
+    public List<Product> getProducts() {
         return productRepository.findAll();
     }
 
-
-
+    public Product getProduct(Integer id) {
+        Optional<Product> product = productRepository.findById(id);
+        return product.orElse(null);
+    }
 
 
 //    List<ProductRequest> productRequestList = new ArrayList<ProductRequest>();

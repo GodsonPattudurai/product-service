@@ -11,16 +11,11 @@ import lombok.Setter;
 @Setter
 @Builder
 public class ProductRequest {
-
     @NotNull
-    @NotBlank
+    @NotBlank(message = "Product Name is Required")
     private String productName;
     private String description;
-    @Min(0)
+    @Min(value = 0, message = "Price should be > 0")
     private Double price;
     private Integer qty;
-
-
 }
-
-//Sample Json Request
